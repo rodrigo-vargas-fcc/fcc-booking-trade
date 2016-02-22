@@ -1,65 +1,100 @@
-/****** Main Styling ******/
+/* Reset */
+ul {
+	margin: 0px;
+}
+a {
+	color: #26B8E5;
+}
 
-body {
-	font-family: 'Roboto', sans-serif;
+a:hover {
+	color: #1091AF;
+	text-decoration: none;
+}
+
+/* Set element default styles */
+
+span {
+	color: #888;
 	font-size: 16px;
 }
 
-p {
-	margin: 8px 0 0 0;
+body {
+	background-color: #EAEAEA;
 }
 
-.container p {
-	text-align: center;
-	padding: 0;
-}
-
-/****** Logo Div Styling ******/
-
-img {
-	margin: 20px auto 0 auto;
+/* Font Styles */
+.talign {
 	display: block;
-}
-
-.clementine-text { /* Styling for the Clementine.js text */
-	padding: 0;
-	margin: -25px 0 0 0;
-	font-weight: 500;
-	font-size: 60px;
-	color: #FFA000;
-}
-
-/****** Click Styling ******/
-
-.btn-container {	/* Styling for the div that contains the buttons */
-	margin: -10px auto 0 auto;
 	text-align: center;
 }
 
-.btn {	/* Styling for buttons */
-	margin: 0 8px;
-	color: white;
-	background-color: #00BCD4;
+#header {
+	background-color: #26B8E5;
+}
+
+#header a {
+	color: #fff;
+}
+
+#header ul {
+	list-style: none;
+}
+
+#header li a, #header a {
 	display: inline-block;
-	border: 0;
-	font-size: 14px;
+	padding: 20px;
+}
+
+#header li a.active {
+	background-color: #1091AF;
+}
+
+#logo {
+	background-color: #fff;
+	border: 1px solid #1091AF;
+	border-radius: 5px;
+	margin: 9px 25px;
+}
+
+#logo a {
+	color: #1091AF;
+	display: block;
+	padding: 10px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#content {
+	margin-top: 25px;
+}
+
+#form-container {
+	border: 1px solid #26B8E5;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 	border-radius: 3px;
-	padding: 10px 5px;
-	width: 100px;
-	font-weight: 500;
+	margin: 10px 0;
+	padding: 25px;
 }
 
-.btn:focus {	/* Remove outline when hovering over button */
-	outline: none;
+/* Books */
+.book-image-container {
+	margin-bottom: 15px;
 }
 
-.btn:active {	/* Scale the button down by 10% when clicking on button */
-	transform: scale(0.9, 0.9);
-	-webkit-transform: scale(0.9, 0.9);
-	-moz-transform: scale(0.9, 0.9);
+.book-image-container img {
+	max-width: 200px;
 }
 
-.btn-delete {	/* Styling for delete button */
-	background-color: #ECEFF1;
-	color: #212121;
+.book {
+	background-color: #fff;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.09);
+	border-radius: 3px;
+	margin-bottom: 15px;
+	padding: 10px 25px;
+}
+
+.book-thumb-title {
+	color: #555;
+	font-size: 18px;
+	margin: 10px 0 5px 0;
 }

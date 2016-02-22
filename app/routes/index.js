@@ -1,17 +1,13 @@
 'use strict';
 
-var ClickHandler = require(process.cwd() + '/app/controllers/clickHandler.server.js');
+var PagesController = require(process.cwd() + '/app/controllers/pages_controller.js');
 
 module.exports = function (app, db) {
-   var clickHandler = new ClickHandler(db);
+  var pagesController = new PagesController();
+  app.get('/', pagesController.home);
 
-   app.route('/')
-      .get(function (req, res) {
-         res.sendFile(process.cwd() + '/public/index.html');
-      });
-
-   app.route('/api/clicks')
-      .get(clickHandler.getClicks)
-      .post(clickHandler.addClick)
-      .delete(clickHandler.resetClicks);
+  app.get('/login', pagesController.login)
+  app.get('/signup', pagesController.signup)
+  app.get('/books', pagesController.books)
+  app.get('/user/books/book', pagesController.book)
 };
