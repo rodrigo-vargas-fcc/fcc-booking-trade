@@ -3,3 +3,72 @@ block content
   #book-container
     h1 Book Title
     a(href="/user") Book Owner
+    .book-image-container
+      img(src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+
+    a(class="btn btn-primary" data-toggle="modal" data-target="#trade") Propose a trade
+
+    <!-- Modal -->
+    div(class="modal fade" id="trade" tabindex="-1" role="dialog" aria-labelledby="tradeLabel")
+      div(class="modal-dialog" role="document")
+        div(class="modal-content")
+          div(class="modal-header")
+            button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") "&times;"
+            h4(class="modal-title" id="tradeLabel") Book trade proposal
+          
+          div(class="modal-body")
+            .row
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+              
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+              
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+
+              .col-xs-4
+                a(href="#" class="book-thumb-trade")
+                  img(class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg")
+
+          div(class="modal-footer")
+            button(type="button" class="btn btn-default" data-dismiss="modal") Cancel
+            button(type="button" class="btn btn-success") Confirm
+
+  script(type="text/javascript" src="/public/js/book.js")

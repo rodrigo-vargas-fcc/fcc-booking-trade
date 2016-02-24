@@ -1,0 +1,12 @@
+extends ../app
+block content
+  .row
+    .col-xs-6
+      form(method="POST" action="/my-books")
+        input(id="book_name" type="text" placeholder="Name" class="form-control")
+        #sugestions-container(style="display:none")
+          ul#suggestions-box
+          
+        button(type="submit" class="btn btn-primary") Submit
+
+  script(type="text/javascript" src="/public/js/books/new.js")

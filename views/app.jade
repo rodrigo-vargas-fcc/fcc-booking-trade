@@ -4,6 +4,8 @@ html
     title Rvg Voting App
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
     link(rel="stylesheet" href="/public/css/main.css")
+    script(type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js")
+    script(type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
   body
     #header
       .container
@@ -11,16 +13,21 @@ html
           .col-xs-3
             #logo
               a(href="/") Book Trading Club
-          #nav.col-xs-7
+          #nav.col-xs-6
             ul
               li
                 a.active(href="/books") BOOKS
-          #info-user.col-xs-2
+              li
+                a(href="/my-books") MY BOOKS
+          #info-user.col-xs-3
             if (user)
               a(href="/settings") #{ user.local.email }
             else
-              a(href="/signup") Signup
-              a(href="/login") Login
+              ul
+                li
+                  a(href="/signup") Signup
+                li
+                  a(href="/login") Login
 
     #content.container
       if message && message.length > 0
