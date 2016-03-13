@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bookTrading">
+<head>
+  <meta charset="UTF-8">
+  
+  <base href="/">
+
+  <title>Book Trading</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+  <script type="text/javascript" src="js/core.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3">
+          <div id="logo">
+            <a href="/">Book Trading Club</a>
+          </div>
+        </div>
+
+        <div id="nav" class="col-xs-6">
+          <ul>
+            <li>
+              <a href="/books" class="active">BOOKS</a>
+            </li>
+
+            <li>
+              <a href="/my-books">MY BOOKS</a>
+            </li>
+          </ul>
+            
+        </div>
+            
+        <div id="info-user" class="col-xs-3">
+          <ul>
+            <li>
+              <a href="/signup">Signup</a>
+            </li>                  
+            <li>
+              <a href="/login">Login</a>  
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="content" class="container">
+    <div ng-view></div>  
+  </div>  
+</body>
+</html>
