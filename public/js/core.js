@@ -1,6 +1,6 @@
 var bookTradingApp = angular.module('bookTrading', ['ngRoute']);
 
-bookTradingApp.controller('MainController', ['$scope', function($scope){
+bookTradingApp.controller('MainController', ['$rootScope', '$scope', '$http', '$location', function($rootScope, $scope, $http, $location){
   $scope.books = [
     { name: 'Master HTML/CSS/Javascript', completed: true },
     { name: 'Learn AngularJS', completed: false },
@@ -9,6 +9,46 @@ bookTradingApp.controller('MainController', ['$scope', function($scope){
     { name: 'Setup MongoDB database', completed: false },
     { name: 'Be awesome!', completed: false },
   ]
+
+  $rootScope.userId = 0;
+
+  $scope.signup = function() {
+    if ($scope.formData.email != undefined
+        && $scope.formData.password != undefined) {
+      $scope.loading = true;
+
+      $http.post('/api/signup', $scope.formData)
+
+      .then(function successCallback(response) {
+          if (response.data.status == "success"){
+            $rootScope.userId = response.data.user._id;
+
+            $location.path( "/books" );
+          }          
+        }, function errorCallback(response) {
+          // TODO: THink in something to handle the signup error
+        });
+    }
+  }
+
+  $scope.login = function() {
+    if ($scope.formData.email != undefined
+        && $scope.formData.password != undefined) {
+      $scope.loading = true;
+
+      $http.post('/api/signup', $scope.formData)
+
+      .then(function successCallback(response) {
+          if (response.data.status == "success"){
+            $rootScope.userId = response.data.user._id;
+
+            //$location.path( "/books" );
+          }          
+        }, function errorCallback(response) {
+          // TODO: THink in something to handle the signup error
+        });
+    }
+  }
 }]);
 
 bookTradingApp.config(function ($routeProvider, $locationProvider) {

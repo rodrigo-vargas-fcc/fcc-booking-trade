@@ -15,7 +15,7 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body ng-controller="MainController">
   <div id="header">
     <div class="container">
       <div class="row">
@@ -39,7 +39,7 @@
         </div>
             
         <div id="info-user" class="col-xs-3">
-          <ul>
+          <ul ng-if="userId == 0">
             <li>
               <a href="/signup">Signup</a>
             </li>                  
@@ -47,6 +47,9 @@
               <a href="/login">Login</a>  
             </li>
           </ul>
+          <div ng-if="userId != 0">
+            <span ng-bind="userId"></span>
+          </div>
         </div>
       </div>
     </div>

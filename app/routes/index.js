@@ -1,20 +1,55 @@
 'use strict';
 
 var PagesController = require(process.cwd() + '/app/controllers/pages_controller.js');
+var User            = require('../models/user');
+var config          = require('../../config/database');
 
-module.exports = function (app, db) {
-  //var pagesController = new PagesController();
-  //app.get('/', pagesController.home);
+module.exports = function (app, db, jwt) {
+  app.post('/api/signup', function(req, res) {
+    if (!req.body.name || !req.body.password)
+    {
+      res.json({success: false, msg: 'Please pass name and password.'});
+    }
+    else 
+    {
+      var newUser = new User();
+      newUser.local.email = req.body.name;
+      newUser.local.password = newUser.generateHash(req.body.password);
+      
+      newUser.save(function(err) {
+        if (err) {
+          return res.json({success: false, msg: 'Username already exists.'});
+        }
+        res.json({success: true, msg: 'Successful created new user.'});
+      });
+    }
+  });
 
-  /*app.get('/login', pagesController.login)
-  app.get('/signup', pagesController.signup)
-  app.get('/books', pagesController.books)
-  app.get('/books/new', pagesController.books_new)
-  app.get('/my-books', pagesController.my_books)
-  app.post('/my-books', pagesController.my_books)
-  app.get('/user/books/book', pagesController.book)*/
+  app.post('/api/login', function(req, res)
+  {
+    var query = { 'local.email': req.body.name };
+    User.findOne(query, function(err, user) {
+      if (err) 
+        throw err;
+ 
+      if (!user)
+      {
+        res.send({success: false, msg: 'Authentication failed. User not found.'});
+        return;
+      } 
+      
+      if (!user.validPassword(req.body.password))
+      {
+        res.send({success: false, msg: 'Authentication failed. Wrong password.'});
+        return;
+      }
 
-  // application -------------------------------------------------------------
+      var token = jwt.encode(user, config.secret);
+        
+      res.json({success: true, token: 'JWT ' + token});      
+    });
+  });
+
   app.get('*', function(req, res) {
     res.sendfile('./public/index.html');
   });
