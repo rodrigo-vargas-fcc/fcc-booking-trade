@@ -6,14 +6,14 @@ var config          = require('../../config/database');
 
 module.exports = function (app, db, jwt) {
   app.post('/api/signup', function(req, res) {
-    if (!req.body.name || !req.body.password)
+    if (!req.body.email || !req.body.password)
     {
-      res.json({success: false, msg: 'Please pass name and password.'});
+      res.json({success: false, msg: 'Please pass email and password.'});
     }
     else 
     {
       var newUser = new User();
-      newUser.local.email = req.body.name;
+      newUser.local.email = req.body.email;
       newUser.local.password = newUser.generateHash(req.body.password);
       
       newUser.save(function(err) {
@@ -27,7 +27,7 @@ module.exports = function (app, db, jwt) {
 
   app.post('/api/login', function(req, res)
   {
-    var query = { 'local.email': req.body.name };
+    var query = { 'local.email': req.body.email };
     User.findOne(query, function(err, user) {
       if (err) 
         throw err;
