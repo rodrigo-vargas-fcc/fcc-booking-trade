@@ -1,5 +1,3 @@
-//var bookTradingApp = angular.module('bookTrading', ['ngRoute']);
-
 bookTradingApp.factory('UserService', function() {
   var token = '';
 
@@ -17,14 +15,14 @@ bookTradingApp.config(function ($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'books.html',
-      controller: 'MainController'
+      controller: 'BookController'
     })
     .when('/books', {
-      templateUrl: 'books.html',
+      templateUrl: 'templates/books/books.html',
       controller: 'BookController'
     })
     .when('/book', {
-      templateUrl: 'book.html',
+      templateUrl: 'templates/books/book.html',
       controller: 'BookController'
     })
     .when('/signup', {
@@ -36,12 +34,16 @@ bookTradingApp.config(function ($routeProvider, $locationProvider) {
       controller: 'MainController'
     })
     .when('/my-books', {
-      templateUrl: 'my-books.html',
-      controller: 'MainController'
+      templateUrl: 'templates/books/my-books.html',
+      controller: 'BookController'
     })
     .when('/books/new', {
       templateUrl: 'templates/books/new.html',
-      controller: 'MainController'
+      controller: 'BookController'
+    })
+    .when('/users/:userId', {
+      templateUrl: 'templates/users/user.html',
+      controller: 'UserController'
     });
 
   $locationProvider.html5Mode(true);

@@ -1,0 +1,22 @@
+This is the personal page of
+
+{{ user. email }}
+
+<h2>Books of the user</h2>
+
+<div class="book-list" ng-repeat="book in user.books">
+  <div class="row">
+    <div class="col-xs-3">
+      <div class="book">
+        <a href="/book">
+          <h2 class="book-thumb-title">{{ book.title }}</h2>
+        </a>
+        <div class="book-image-container">
+          <img class="img-responsive" src="{{ book.image_url }}" alt="">
+        </div>
+
+        <button class="btn btn-primary" ng-click="proposeTrade({{ book._id }})"></button>
+      </div>    
+    </div>
+  </div>  
+</div>

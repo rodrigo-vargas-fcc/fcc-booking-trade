@@ -35,7 +35,7 @@ db.once('open', function() {
 
    require('./config/passport')(passport);
    
-   routes(app, db, jwt);
+   routes(app, db, jwt, passport);
 
    app.listen(3000, function () {
       console.log('Node.js listening on port 3000...');

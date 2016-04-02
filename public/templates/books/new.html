@@ -1,15 +1,16 @@
 <div class="row">
   <div class="col-xs-6">
-      <form method="POST" action="/my-books">
-        <input id="book_name" type="text" placeholder="Name" class="form-control">
+      <div>
+        <input id="book_name" type="text" placeholder="Name" class="form-control" ng-model="asyncSelected" 
+         uib-typeahead="address for address in getLocation('ala')" typeahead-loading="loadingLocations" typeahead-no-results="noResults">
 
-        <div id="sugestions-container" style="display:none">
-          <ul id="suggestions-box"></ul>
-        </div>
+        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+        <div ng-show="noResults">
+          <i class="glyphicon glyphicon-remove"></i> No Results Found
+        </div>         
           
-          
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+        <button type="submit" class="btn btn-primary" ng-click="addBook()">Submit</button>
+      </div>
   </div>
 </div>
 

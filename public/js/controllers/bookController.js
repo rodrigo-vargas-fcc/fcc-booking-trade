@@ -1,10 +1,52 @@
-bookTradingApp.controller('BookController', ['$scope', function($scope){
-  $scope.books = [
-    { name: 'Master HTML/CSS/Javascript', completed: true },
-    { name: 'Learn AngularJS', completed: false },
-    { name: 'Build NodeJS backend', completed: false },
-    { name: 'Get started with ExpressJS', completed: false },
-    { name: 'Setup MongoDB database', completed: false },
-    { name: 'Be awesome!', completed: false },
-  ]
+bookTradingApp.controller('BookController', ['$scope', '$http', '$location', 'UserService', function($scope, $http, $location, UserService){
+  var currentToken = UserService.getToken();
+
+  if (currentToken == "")
+  {
+    $location.path('/login');
+    return;
+  }
+
+  var headers = {
+    'Authorization': currentToken,
+    'Accept': 'application/json;odata=verbose'
+  };
+  
+  $scope.getBooks = function(){
+    $http({
+      method: 'GET',
+      'url': '/api/books',
+      headers : headers
+    })
+    .then(
+      function successCallback(response) {
+        if (response.data.success == true){
+          $scope.books = response.data.books;
+        }          
+      },
+      function errorCallback(response) {
+        // TODO: THink in something to handle the signup error
+      }
+    );
+  }
+
+  $scope.addBook = function(){
+    $http(
+    {
+      method: 'POST',
+      url: '/api/books/new',
+      headers : headers
+    })
+    .then(function successCallback(response) {
+        if (response.data.success == true){
+          $location.path('/my-books');
+        }
+      },
+      function errorCallback(response) {
+        // TODO: THink in something to handle the signup error
+      }
+    );
+  }
+
+  $scope.getBooks();
 }]);
