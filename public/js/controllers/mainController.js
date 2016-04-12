@@ -1,4 +1,4 @@
-var bookTradingApp = angular.module('bookTrading', ['ngRoute', 'ui.bootstrap']);
+var bookTradingApp = angular.module('bookTrading', ['ngRoute', 'ui.bootstrap', 'ui.rvg.angular']);
 
 bookTradingApp.controller('MainController', ['$scope', '$http', '$location','UserService', function($scope, $http, $location, UserService){
   $scope.signup = function() {

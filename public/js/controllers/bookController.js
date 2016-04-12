@@ -3,9 +3,15 @@ bookTradingApp.controller('BookController', ['$scope', '$http', '$location', 'Us
 
   if (currentToken == "")
   {
-    $location.path('/login');
+    //$location.path('/login');
     return;
   }
+
+  $scope.$watch('test', function(value, oldValue){
+    console.log(value);
+  });
+
+  $scope.$digest();
 
   var headers = {
     'Authorization': currentToken,

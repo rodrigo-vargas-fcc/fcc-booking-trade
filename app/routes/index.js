@@ -30,6 +30,10 @@ module.exports = function (app, db, jwt, passport) {
     }
   });
 
+  app.get('/api/test', function(req, res){
+    res.json({ results: ['a' + req.query.query, 'b', 'c']});      
+  });
+
   app.post('/api/login', function(req, res)
   {
     var query = { 'local.email': req.body.email };

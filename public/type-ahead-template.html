@@ -1,0 +1,7 @@
+<input type="text" ng-model="query">
+
+<div id="results" ng-repeat="result in results">
+  <a ng-click="selectItem(result.id)">{{ result.volumeInfo.title }}</a>
+</div>
+
+<span>Query {{ query }} on {{ jsonUrl }}</span>
