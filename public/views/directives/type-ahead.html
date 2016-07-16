@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-xs-6">
+    <input type="text" ng-model="inputValue" ng-change="typeSomething()">
+  </div>
+  <div class="col-xs-6">
+    <div class="selected-result" ng-show="selectedResult">
+      {{ selectedResult.volumeInfo.title }}
+    </div>
+  </div>
+</div>
+
+<div class="results-list">
+  <div class="result-item" ng-repeat="result in results" ng-click="setResult(result)">
+    <span>{{ result.volumeInfo.title }}</span>
+  </div>
+</div>

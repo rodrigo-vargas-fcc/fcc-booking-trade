@@ -15,6 +15,8 @@ module.exports = function (app, jwt, passport) {
 
   app.post('/api/books/new', passport.authenticate('jwt', { session: false}), BooksController.new);
 
+  app.post('/api/books/destroy', passport.authenticate('jwt', { session: false}), BooksController.destroy);
+
   app.get('/api/user', passport.authenticate('jwt', { session: false}), function(req, res) {
     var token = helpers.getToken(req.headers);
     if (token) {

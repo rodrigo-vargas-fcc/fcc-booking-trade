@@ -1,18 +1,37 @@
-<h1>My Books</h1>
-<div id="books-list">
-  <div class="row">
-    <div class="col-xs-3">
-      <div class="book">
-        <a href="/user/books/book">
-          <h2 class="book-thumb-title">{{ book.title }}</h2>
-        </a>
-          
-        <div class="book-image-container">
-          <img class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg" alt="">
+<div ng-include src="'views/header.html'"></div>
+
+<link rel="stylesheet" href="css/my-books.css">
+
+<div class="internal-content container">
+  <h1 class="title">My Books</h1>
+
+  <div class="book-list">
+    <div class="loader-wrap" ng-show="loading > 0">
+      <img src="images/loading.gif" alt="">
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3" ng-repeat="book in myBooks">
+        <div class="book">
+          <div class="row">
+            <a class="col-xs-11" href="/user/books/book">
+              <h2 class="book-thumb-title">{{ book.title }}</h2>
+            </a>
+          </div>
+
+          <button ng-click="removeBook(book._id)" class="btn remove-book-btn">
+            <i class="fa fa-trash"></i>
+          </button>
+
+          <div class="book-image-container">
+            <img class="img-responsive" src="{{ book.image_url }}" alt="">
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <rvgtypeahead ng-model="newBook"></rvgtypeahead>
+
+  <button ng-click="addBook()" ng-disabled="!newBook" class="btn btn-primary">Add book</button>
 </div>
-  
-<a href="/books/new" class="btn btn-primary">Add book</a>

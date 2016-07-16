@@ -3,6 +3,7 @@
 angular.module('bookTrading')
 .controller('BookCtrl', function($scope, $http, $location, UserService){
   var currentToken = UserService.getToken();
+  $scope.loading = 0;
 
   if (!currentToken)
   {
@@ -16,6 +17,7 @@ angular.module('bookTrading')
   };
   
   $scope.getBooks = function(){
+    $scope.loading++;
     $http({
       method: 'GET',
       'url': '/api/books',
@@ -23,12 +25,14 @@ angular.module('bookTrading')
     })
     .then(
       function successCallback(response) {
-        if (response.data.success == true){
-          $scope.books = response.data.books;
-        }          
+        if (response.data.success == true)
+          $scope.myBooks = response.data.books;
+        
+        $scope.loading--;
       },
       function errorCallback(response) {
         alert(response);
+        $scope.loading--;
       }
     );
   }
@@ -38,14 +42,38 @@ angular.module('bookTrading')
     {
       method: 'POST',
       url: '/api/books/new',
-      headers : headers
+      headers : headers,
+      data : { 'name' : $scope.newBook.volumeInfo.title, 
+               'image_url' : $scope.newBook.volumeInfo.imageLinks.thumbnail }
     })
     .then(function successCallback(response) {
-        if (response.data.success == true){
-          $location.path('/my-books');
-        }
+        $scope.newBook = null;
+        $scope.getBooks();
       },
       function errorCallback(response) {
+        alert(response);
+      }
+    );
+  }
+
+  $scope.removeBook = function(bookId){
+    if (!confirm('Are you sure?'))
+      return;
+
+    $scope.loading++;
+    $http(
+    {
+      method: 'POST',
+      url: '/api/books/destroy',
+      headers : headers,
+      data : { 'id' : bookId }
+    })
+    .then(function successCallback(response) {
+        $scope.loading--;
+        $scope.getBooks();
+      },
+      function errorCallback(response) {
+        $scope.loading--;
         alert(response);
       }
     );

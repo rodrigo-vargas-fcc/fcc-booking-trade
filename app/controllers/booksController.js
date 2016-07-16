@@ -3,10 +3,10 @@
 var jwt           = require('jsonwebtoken');
 
 var User          = require('../models/user');
-var Book            = require('../models/book');
+var Book          = require('../models/book');
 
 var Config        = require('../../config/secret');
-var Helpers         = require('../helpers');
+var Helpers       = require('../helpers');
 
 function BooksController () { }
 
@@ -14,7 +14,7 @@ BooksController.getAll = function(req, res) {
   var token = Helpers.getToken(req.headers);
   if (token) {
     var decoded = jwt.decode(token, Config.secret);
-    console.log(decoded.local);
+    
     User.findOne({
       'local.email': decoded._doc.local.email
     }, function(err, user) {
@@ -42,7 +42,7 @@ BooksController.new = function(req, res) {
   if (token) {
     var decoded = jwt.decode(token, Config.secret);
     User.findOne({
-      'local.email': decoded.local.email
+      'local.email': decoded._doc.local.email
     }, function(err, user) {
       if (err) 
         throw err;
@@ -54,14 +54,43 @@ BooksController.new = function(req, res) {
       {
         var book = new Book( { title : req.body.name,
                                ownerId : user._id,
-                               excerpt : 'Blablu',
-                               image_url : 'gluglu' });
+                               image_url : req.body.image_url });
         
         book.save(function(err){
           if (err) 
             throw err;
           res.json({success: true});
         })
+      }
+    });
+  } 
+  else 
+  {
+    return res.status(403).send({success: false, msg: 'No token provided.'});
+  }
+}
+
+BooksController.destroy = function(req, res) {
+  var token = Helpers.getToken(req.headers);
+  if (token) {
+    var decoded = jwt.decode(token, Config.secret);
+    User.findOne({
+      'local.email': decoded._doc.local.email
+    }, function(err, user) {
+      if (err) 
+        throw err;
+
+      if (!user) {
+        return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
+      } 
+      else
+      {
+        Book.find({ _id: req.body.id }).remove().exec(function (err, book) {
+          if (err) 
+            throw err;
+          
+          return res.json({success: true});
+        });
       }
     });
   } 

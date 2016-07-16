@@ -3,7 +3,8 @@
 angular
   .module('bookTrading', [
         'ngRoute',
-        'ngCookies'
+        'ngCookies',
+        'ui.rvg.angular'
         ]
       )
   .factory('UserService', function($cookies) {
@@ -19,7 +20,7 @@ angular
       setToken: function(value) {
         token = value;
         var expirationDate = new Date();
-        expirationDate.setMinutes(expirationDate.getMinutes() + 5);
+        expirationDate.setMinutes(expirationDate.getMinutes() + 60);
         $cookies.put('token', token, {'expires' : expirationDate });
       }
     };

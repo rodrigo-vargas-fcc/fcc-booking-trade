@@ -133,3 +133,42 @@ body {
 .light-anchor:hover {
 	color: #fff;
 }
+
+.results-list {
+  background-color: #fff;
+  width: 500px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  margin: 4px 0;
+}
+
+.result-item {
+	cursor: pointer;
+	padding: 3px 8px;
+}
+
+.result-item:hover {
+	background-color: #8ae4ff;
+}
+
+.selected-result {
+  background-color: #8ae4ff;
+  padding: 4px;
+  border: 1px solid #26b8e5;
+  border-radius: 4px;
+}
+
+.loader-wrap {
+  background-color: rgba(50, 50, 50, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.loader-wrap img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}

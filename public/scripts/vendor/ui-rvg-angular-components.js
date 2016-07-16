@@ -1,39 +1,45 @@
-angular.module('ui.rvg.angular', [])
-.directive('rvgtypeahead', [ '$http', function($http) {
+angular
+.module('ui.rvg.angular', [])
+.directive('rvgtypeahead', function($http) {
   return {
     restrict: 'E',
-    require : 'ngModel',
+    templateUrl: 'views/directives/type-ahead.html',
+
     scope: {
-      jsonUrl: '@jsonUrl',
-      results: '@results',
-      query: '@query',
-      ngModel: '=ngModel'
+      selectedResult: '=ngModel'
     },
-    link: function(scope, elem, attrs, ngModel) {
-      scope.selectItem = function(itemId) {
-        console.log(itemId);
-//        ngModelController.$render = itemId;
-        //scope.$apply(function() {
-          scope.ngMOdel = itemId;
-        //});
+
+    controller: function($scope){
+      if ($scope.selectedResult === undefined) {
+        $scope.selectedResult = null;
       }
 
-      scope.$watch("query", function(query) {
+      $scope.typeSomething = function(){
+        if ($scope.inputValue.length > 2)
+          $scope.getResults();        
+      }
+
+      $scope.getResults = function() {
         $http({
           method : 'GET',
           url    : 'https://www.googleapis.com/books/v1/volumes',
-          params : { q : query }
+          params : { q : $scope.inputValue }
         })
         .then(
           function successCallback(response) {
-            scope.results = response.data.items;
+            $scope.results = response.data.items;
           },
           function errorCallback(response) {
-            // TODO: THink in something to handle the signup error
+            console.log(response);
           }
         );
-      });
-    },
-    templateUrl: 'type-ahead-template.html'
+      }
+
+      $scope.setResult = function(result){
+        $scope.selectedResult = result;
+        $scope.inputValue = "";
+        $scope.results = [];
+      }
+    }
   };
-}]);
+});
