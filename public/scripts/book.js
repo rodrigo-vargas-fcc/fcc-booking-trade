@@ -8,5 +8,5 @@ function registerBookClick(){
 }
 
 $(document).ready(function(){
-  registerBookClick();
+  //registerBookClick();
 });

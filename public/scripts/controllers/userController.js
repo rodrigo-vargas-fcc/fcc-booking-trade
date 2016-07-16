@@ -1,4 +1,7 @@
-bookTradingApp.controller('UserController', ['$scope', '$routeParams', '$http','$location', 'UserService', function($scope, $routeParams, $http, $location, UserService){
+'use strict';
+
+angular.module('bookTrading')
+.controller('UserController', ['$scope', '$routeParams', '$http','$location', 'UserService', function($scope, $routeParams, $http, $location, UserService){
   var userId = $routeParams.userId;
 
   var currentToken = UserService.getToken();

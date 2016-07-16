@@ -1,21 +1,27 @@
-bookTradingApp.factory('UserService', function() {
-  var token = '';
+'use strict';
 
-  return {
-    getToken: function () {
-      return token;
-    },
-    setToken: function(value) {
-      token = value;
-    }
-  };
-});
+angular
+  .module('bookTrading', [
+        'ngRoute'
+        ]
+      )
+  .factory('UserService', function() {
+    var token = '';
 
-bookTradingApp.config(function ($routeProvider, $locationProvider) {
+    return {
+      getToken: function () {
+        return token;
+      },
+      setToken: function(value) {
+        token = value;
+      }
+    };
+  })
+  .config(function ($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'books.html',
-      controller: 'BookController'
+      templateUrl: 'views/home.html',
+      controller: 'HomeCtrl'
     })
     .when('/books', {
       templateUrl: 'templates/books/books.html',

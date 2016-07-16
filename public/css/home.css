@@ -1,0 +1,13 @@
+.photo-background {
+	background-image: url('/images/home_background.jpg');
+	background-size: cover;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.logo {
+	color: #fff;
+}

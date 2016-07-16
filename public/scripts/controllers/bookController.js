@@ -1,17 +1,18 @@
-bookTradingApp.controller('BookController', ['$scope', '$http', '$location', 'UserService', function($scope, $http, $location, UserService){
+'use strict';
+
+angular.module('bookTrading')
+.controller('BookController', ['$scope', '$http', '$location', 'UserService', function($scope, $http, $location, UserService){
   var currentToken = UserService.getToken();
 
   if (currentToken == "")
   {
     //$location.path('/login');
-    return;
+    //return;
   }
 
   $scope.$watch('test', function(value, oldValue){
     console.log(value);
   });
-
-  $scope.$digest();
 
   var headers = {
     'Authorization': currentToken,
