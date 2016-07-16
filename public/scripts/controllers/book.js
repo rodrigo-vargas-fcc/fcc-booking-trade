@@ -1,18 +1,14 @@
 'use strict';
 
 angular.module('bookTrading')
-.controller('BookController', ['$scope', '$http', '$location', 'UserService', function($scope, $http, $location, UserService){
+.controller('BookCtrl', function($scope, $http, $location, UserService){
   var currentToken = UserService.getToken();
 
   if (currentToken == "")
   {
-    //$location.path('/login');
-    //return;
+    $location.path('/login');
+    return;
   }
-
-  $scope.$watch('test', function(value, oldValue){
-    console.log(value);
-  });
 
   var headers = {
     'Authorization': currentToken,
@@ -28,11 +24,12 @@ angular.module('bookTrading')
     .then(
       function successCallback(response) {
         if (response.data.success == true){
+          console.log(response.data);
           $scope.books = response.data.books;
         }          
       },
       function errorCallback(response) {
-        // TODO: THink in something to handle the signup error
+        alert(response);
       }
     );
   }
@@ -50,10 +47,10 @@ angular.module('bookTrading')
         }
       },
       function errorCallback(response) {
-        // TODO: THink in something to handle the signup error
+        alert(response);
       }
     );
   }
 
   $scope.getBooks();
-}]);
+});

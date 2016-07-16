@@ -1,6 +1,4 @@
-.photo-background {
-	background-image: url('/images/home_background.jpg');
-	background-size: cover;
+.fullscreen-background {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -8,6 +6,27 @@
 	right: 0;
 }
 
+.photo-background {
+	background-image: url('/images/home_background.jpg');
+	background-size: cover;
+}
+
+.mask-background {
+	background-color: rgba(50, 50, 50, 0.5);
+}
+
+.header {
+	margin: 100px;
+}
+
 .logo {
-	color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-item {
+  float: right;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0px 15px;
 }

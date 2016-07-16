@@ -2,18 +2,25 @@
 
 angular
   .module('bookTrading', [
-        'ngRoute'
+        'ngRoute',
+        'ngCookies'
         ]
       )
-  .factory('UserService', function() {
+  .factory('UserService', function($cookies) {
     var token = '';
 
     return {
       getToken: function () {
+        if (token == '')
+          token = $cookies.get('token');
+
         return token;
       },
       setToken: function(value) {
         token = value;
+        var expirationDate = new Date();
+        expirationDate.setMinutes(expirationDate.getMinutes() + 5);
+        $cookies.put('token', token, {'expires' : expirationDate });
       }
     };
   })
@@ -24,32 +31,32 @@ angular
       controller: 'HomeCtrl'
     })
     .when('/books', {
-      templateUrl: 'templates/books/books.html',
-      controller: 'BookController'
+      templateUrl: 'views/books/books.html',
+      controller: 'BookCtrl'
     })
     .when('/book', {
-      templateUrl: 'templates/books/book.html',
-      controller: 'BookController'
+      templateUrl: 'views/books/book.html',
+      controller: 'BookCtrl'
     })
     .when('/signup', {
-      templateUrl: 'templates/signup.html',
-      controller: 'MainController'
+      templateUrl: 'views/signup.html',
+      controller: 'UserCtrl'
     })
     .when('/login', {
-      templateUrl: 'templates/login.html',
-      controller: 'MainController'
+      templateUrl: 'views/login.html',
+      controller: 'UserCtrl'
     })
     .when('/my-books', {
-      templateUrl: 'templates/books/my-books.html',
-      controller: 'BookController'
+      templateUrl: 'views/books/my-books.html',
+      controller: 'BookCtrl'
     })
     .when('/books/new', {
-      templateUrl: 'templates/books/new.html',
-      controller: 'BookController'
+      templateUrl: 'views/books/new.html',
+      controller: 'BookCtrl'
     })
     .when('/users/:userId', {
-      templateUrl: 'templates/users/user.html',
-      controller: 'UserController'
+      templateUrl: 'views/users/user.html',
+      controller: 'UserCtrl'
     });
 
   $locationProvider.html5Mode(true);
