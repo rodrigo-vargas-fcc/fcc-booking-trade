@@ -4,7 +4,7 @@ angular.module('bookTrading')
 .controller('BookCtrl', function($scope, $http, $location, UserService){
   var currentToken = UserService.getToken();
 
-  if (currentToken == "")
+  if (!currentToken)
   {
     $location.path('/login');
     return;
@@ -24,7 +24,6 @@ angular.module('bookTrading')
     .then(
       function successCallback(response) {
         if (response.data.success == true){
-          console.log(response.data);
           $scope.books = response.data.books;
         }          
       },

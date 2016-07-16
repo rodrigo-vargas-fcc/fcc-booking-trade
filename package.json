@@ -1,37 +1,32 @@
 {
-  "name": "clementinejs",
-  "version": "1.0.2",
-  "description": "A light-weight MEAN stack boilerplate.",
+  "name": "rodrigovargas-fcc-booking-trade",
+  "version": "1.0.0",
+  "description": "A book trading web app.",
   "main": "server.js",
-  "scripts": {
-    "start": "gulp"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnstonbl01/clementinejs"
+    "url": "git+https://github.com/rodrigovargas/fcc-booking-trade"
   },
-  "homepage": "http://johnstonbl01.github.io/clementinejs/",
-  "bugs": "https://github.com/johnstonbl01/clementinejs/issues",
+  "homepage": "http://rodrigovargas.me/projects/fcc-booking-trade/",
+  "bugs": "github.com/rodrigovargas/fcc-booking-trade/issues",
   "keywords": [
     "MEAN",
     "MongoDB",
     "Express",
     "Angular",
     "Node",
-    "javascript",
-    "boilerplate"
+    "javascript"
   ],
-  "author": "Blake Johnston",
-  "license": "MIT",
+  "author": "Rodrigo Vargas",
   "dependencies": {
     "bcrypt": "^0.8.5",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.9.2",
     "express": "~4.9.8",
-    "jwt-simple": "^0.3.1",
+    "jsonwebtoken": "^7.0.0",
     "mongoose": "~4.2.4",
     "morgan": "~1.5.0",
     "passport": "^0.3.0",
-    "passport-jwt": "^1.2.1"
+    "passport-jwt": "^2.0.0"
   }
 }

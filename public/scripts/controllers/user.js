@@ -17,7 +17,7 @@ angular.module('bookTrading')
             $location.path("/books");
           }          
         }, function errorCallback(response) {
-          alert(response);
+          alert(response.data);
         });
     }
   }
@@ -36,7 +36,7 @@ angular.module('bookTrading')
             $location.path("/books");
           }          
         }, function errorCallback(response) {
-          alert(response);
+          alert(response.data);
         });
     }
   }
