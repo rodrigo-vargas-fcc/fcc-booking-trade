@@ -25,9 +25,31 @@ BooksController.getAll = function(req, res) {
       } 
       else
       {
-        Book.find(function(err, books){
-          res.json({success: true, books : books});
-        })
+        Book.find({})
+       .populate('trades')
+       .exec(function(err, books) {
+          var booksReturned = [];
+
+          books.forEach(function(book){
+            var yetProposed = false;
+            book.trades.forEach(function(trade){
+              if (trade._requester.toString() == user._id.toString())
+                yetProposed = true;
+            });
+
+            booksReturned.push({  
+                                  _id : book._id,
+                                  owner_name : book.owner_name,
+                                  yet_proposed : yetProposed,
+                                  owner_id : book.owner_id,
+                                  image_url : book.image_url,
+                                  title : book.title,
+                                  trades : book.trades
+                                });
+          });
+
+          res.json({success: true, books : booksReturned});
+        });
       }
     });
   } 
@@ -54,10 +76,11 @@ BooksController.new = function(req, res) {
       {
         var ownerName = user.getName();
         
-        var book = new Book( { title : req.body.name,
-                               ownerId : user._id,
-                               ownerName : ownerName,
-                               image_url : req.body.image_url });
+        var book = new Book( { 
+                                title : req.body.name,
+                                owner_id : user._id,
+                                owner_name : ownerName,
+                                image_url : req.body.image_url });
         
         book.save(function(err){
           if (err) 

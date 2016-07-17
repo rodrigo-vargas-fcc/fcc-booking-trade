@@ -17,8 +17,12 @@
             </div>
             <div class="meta-info">
               <span>Owner:</span>
-              <a href="/users/{{ book.ownerId }}" class="thumb-owner">{{ book.ownerName }}</a>
+              <a href="/users/{{ book.owner_id }}" class="thumb-owner">{{ book.owner_name }}</a>
             </div>
+            <button ng-click="proposeTrade(book._id)" class="btn exchange-book-btn" ng-disabled="book.yet_proposed" ng-class="{'in-exchange' : book.yet_proposed}">
+              <i class="fa fa-exchange"></i>
+            </button>
+
           </div>
         </div>
 

@@ -37,6 +37,42 @@ angular.module('bookTrading')
     );
   }
 
+  $scope.loadProposes = function(book){
+    $http({
+      method: 'GET',
+      'url': '/api/trades/get/' + book._id,
+      headers : headers
+    })
+    .then(
+      function successCallback(response) {
+        if (response.data.success == true)
+        {
+          book.trades = response.data.trades;
+        }
+      },
+      function errorCallback(response) {
+        alert(response);
+        $scope.loading--;
+      }
+    );
+  }
+
+  $scope.rejectTrade = function(tradeId){
+    $http(
+    {
+      method: 'POST',
+      url: '/api/trades/destroy/' + tradeId,
+      headers : headers
+    })
+    .then(function successCallback(response) {
+        $scope.getMyBooks();
+      },
+      function errorCallback(response) {
+        alert(response);
+      }
+    );
+  }
+
   $scope.addBook = function(){
     $http(
     {

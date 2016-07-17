@@ -11,20 +11,25 @@
     </div>
 
     <div class="row">
-      <div class="col-xs-2" ng-repeat="book in myBooks">
+      <div class="col-xs-6" ng-repeat="book in myBooks">
         <div class="book">
           <div class="row">
-            <a class="col-xs-11" href="/user/books/book">
+            <div class="book-image-container col-xs-4">
+              <img class="img-responsive" src="{{ book.image_url }}" alt="">
+            </div>
+            <a class="col-xs-8" href="/user/books/book">
               <h2 class="book-thumb-title">{{ book.title }}</h2>
+              <a class="btn" ng-click="loadProposes(book)"><i class="fa fa-exchange"></i> {{ book.trades.length }}</a>
+              <div class="trade-list col-xs-12">
+                <div class="trade" ng-repeat="trade in book.trades">
+                  {{ trade._requester.local.email }}
+                  <a class="btn" ng-click="rejectTrade(trade._id)"><i class="fa fa-close"></i></a>
+                </div>
+              </div>
+              <button ng-click="removeBook(book._id)" class="btn remove-book-btn">
+                <i class="fa fa-trash"></i>
+              </button>    
             </a>
-          </div>
-
-          <button ng-click="removeBook(book._id)" class="btn remove-book-btn">
-            <i class="fa fa-trash"></i>
-          </button>
-
-          <div class="book-image-container">
-            <img class="img-responsive" src="{{ book.image_url }}" alt="">
           </div>
         </div>
       </div>

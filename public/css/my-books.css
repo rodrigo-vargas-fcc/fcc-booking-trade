@@ -12,14 +12,23 @@
   position: relative;
 }
 
-.remove-book-btn {
+.remove-book-btn, .exchange-book-btn {
   border-radius: 0 0 0 5px;
-  position: absolute;
-  right: 0; 
+  right: 0;
   top: 0;
 }
 
 .remove-book-btn:hover {
   background-color: red;
   color: #fff;
+}
+
+.exchange-book-btn:hover {
+  color: #fff;
+  background-color: green;
+}
+
+.exchange-book-btn.in-exchange, .exchange-book-btn.in-exchange:hover {
+  background: yellow;
+  color: #000;
 }
