@@ -4,6 +4,7 @@ var brycpt = require('bcrypt-nodejs');
 var bookSchema = mongoose.Schema({
   title : String,
   ownerId : String,
+  ownerName : String,
   excerpt : String,
   image_url: String
 });

@@ -6,6 +6,7 @@ var userSchema = mongoose.Schema({
   local            : {
       email        : String,
       password     : String,
+      name         : String,
   },
   facebook         : {
       id           : String,
@@ -38,5 +39,9 @@ userSchema.methods.generateHash = function(password) {
 userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
+
+userSchema.methods.getName = function() {
+  return this.local.name ? this.local.name : this.local.email;
+}
 
 module.exports = mongoose.model('User', userSchema);

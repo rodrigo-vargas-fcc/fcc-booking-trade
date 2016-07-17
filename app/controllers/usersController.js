@@ -39,6 +39,7 @@ UsersController.signup = function(req, res) {
   else 
   {
     var newUser = new User();
+    newUser.local.name = req.body.email;
     newUser.local.email = req.body.email;
     newUser.local.password = newUser.generateHash(req.body.password);
     
@@ -47,11 +48,11 @@ UsersController.signup = function(req, res) {
         return res.json({success: false, msg: 'Username already exists.'});
       }
 
-      var token = jwt.sign(user, Config.secret);
+      var token = jwt.sign(newUser, Config.secret);
 
       res.json({  success: true, 
                   msg: 'Successful created new user.',
-                  token : token });
+                  token :'JWT ' + token });
     });
   }
 }

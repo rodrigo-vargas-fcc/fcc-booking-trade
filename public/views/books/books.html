@@ -1,21 +1,23 @@
 <div ng-include src="'views/header.html'"></div>
 
+<link rel="stylesheet" href="css/my-books.css">
+
 <div class="internal-content container">
   <div id="books-index">
     <h1 class="title">Books</h1>
     <div id="books-list">
       <div class="row">
-        <div class="col-xs-3" ng-repeat="book in books">
+        <div class="col-xs-2" ng-repeat="book in books">
           <div class="book">
             <a href="/book">
               <h2 class="book-thumb-title">{{ book.title }}</h2>
             </a>
             <div class="book-image-container">
-              <img class="img-responsive" src="http://d28hgpri8am2if.cloudfront.net/book_images/cvr9781439148907_9781439148907_hr.jpg" alt="">
+              <img class="img-responsive" src="{{ book.image_url }}" alt="">
             </div>
             <div class="meta-info">
               <span>Owner:</span>
-              <a href="/users/{{ book.ownerId }}" class="thumb-owner">{{ book.ownerId }}</a>
+              <a href="/users/{{ book.ownerId }}" class="thumb-owner">{{ book.ownerName }}</a>
             </div>
           </div>
         </div>

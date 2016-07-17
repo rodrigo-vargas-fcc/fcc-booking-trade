@@ -52,8 +52,11 @@ BooksController.new = function(req, res) {
       } 
       else
       {
+        var ownerName = user.getName();
+        
         var book = new Book( { title : req.body.name,
                                ownerId : user._id,
+                               ownerName : ownerName,
                                image_url : req.body.image_url });
         
         book.save(function(err){
