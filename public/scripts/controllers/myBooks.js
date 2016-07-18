@@ -48,11 +48,28 @@ angular.module('bookTrading')
         if (response.data.success == true)
         {
           book.trades = response.data.trades;
+          book.tradesLoaded = true;
         }
       },
       function errorCallback(response) {
         alert(response);
         $scope.loading--;
+      }
+    );
+  }
+
+  $scope.acceptTrade = function(tradeId){
+    $http(
+    {
+      method: 'POST',
+      url: '/api/trades/accept/' + tradeId,
+      headers : headers
+    })
+    .then(function successCallback(response) {
+        $scope.getMyBooks();
+      },
+      function errorCallback(response) {
+        alert(response);
       }
     );
   }

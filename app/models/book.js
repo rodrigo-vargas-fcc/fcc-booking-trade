@@ -6,7 +6,8 @@ var bookSchema = mongoose.Schema({
   owner_name : String,
   excerpt : String,
   image_url: String,
-  trades : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Trade' }]
+  trades : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Trade' }],
+  traded : Boolean
 });
 
 module.exports = mongoose.model('Book', bookSchema);

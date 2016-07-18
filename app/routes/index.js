@@ -22,6 +22,10 @@ module.exports = function (app, jwt, passport) {
 
   app.get('/api/trades/get/:bookId', passport.authenticate('jwt', { session: false}), TradesController.getOfBook);
 
+  app.post('/api/trades/destroy/:tradeId', passport.authenticate('jwt', { session: false}), TradesController.destroy);
+
+  app.post('/api/trades/accept/:tradeId', passport.authenticate('jwt', { session: false}), TradesController.accept);
+
   app.get('/api/user', passport.authenticate('jwt', { session: false}), function(req, res) {
     var token = helpers.getToken(req.headers);
     if (token) {

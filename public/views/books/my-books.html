@@ -20,10 +20,11 @@
             <a class="col-xs-8" href="/user/books/book">
               <h2 class="book-thumb-title">{{ book.title }}</h2>
               <a class="btn" ng-click="loadProposes(book)"><i class="fa fa-exchange"></i> {{ book.trades.length }}</a>
-              <div class="trade-list col-xs-12">
+              <div class="trade-list col-xs-12" ng-show="book.tradesLoaded">
                 <div class="trade" ng-repeat="trade in book.trades">
                   {{ trade._requester.local.email }}
                   <a class="btn" ng-click="rejectTrade(trade._id)"><i class="fa fa-close"></i></a>
+                  <a class="btn" ng-click="acceptTrade(trade._id)"><i class="fa fa-check"></i></a>
                 </div>
               </div>
               <button ng-click="removeBook(book._id)" class="btn remove-book-btn">

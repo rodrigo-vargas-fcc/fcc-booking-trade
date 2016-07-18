@@ -71,7 +71,6 @@ TradesController.getOfBook = function(req, res) {
       } 
       else
       {
-        console.log(req.params.bookId);
         Trade.find({ _book : req.params.bookId })
         .populate('_requester')
         .exec(function(err, trades){
@@ -80,6 +79,84 @@ TradesController.getOfBook = function(req, res) {
 
             res.json({success: true, trades : trades});
         });
+      }
+    });
+  } 
+  else 
+  {
+    return res.status(403).send({success: false, msg: 'No token provided.'});
+  }
+}
+
+TradesController.destroy =  function(req, res) {
+  var token = Helpers.getToken(req.headers);
+  if (token) {
+    var decoded = jwt.decode(token, Config.secret);
+    User.findOne({
+      'local.email': decoded._doc.local.email
+    }, function(err, user) {
+      if (err) 
+        throw err;
+
+      if (!user) {
+        return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
+      } 
+      else
+      {
+        Trade.remove({ _id : req.params.tradeId }, function(err){
+          if (err)
+            throw err;
+
+            return res.json({success: true });
+        });
+      }
+    });
+  } 
+  else 
+  {
+    return res.status(403).send({success: false, msg: 'No token provided.'});
+  }
+}
+
+TradesController.accept =  function(req, res) {
+  var token = Helpers.getToken(req.headers);
+  if (token) {
+    var decoded = jwt.decode(token, Config.secret);
+    User.findOne({
+      'local.email': decoded._doc.local.email
+    }, function(err, user) {
+      if (err) 
+        throw err;
+
+      if (!user) {
+        return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
+      } 
+      else
+      {
+        Trade.findOne
+        ( 
+          { _id : req.params.tradeId }, 
+          function(err, trade){
+            if (err)
+              throw err;
+
+            trade.completed = true;
+            trade.accepted = true;
+            trade.save();
+
+            Book.update
+            (
+              { _id : trade._book},
+              { traded : true},
+              function(err){
+                if (err) 
+                  throw err;
+
+                return res.json({success: true });
+              }
+            );
+          }
+        );
       }
     });
   } 
