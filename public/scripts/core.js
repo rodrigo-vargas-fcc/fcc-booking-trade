@@ -59,9 +59,9 @@ angular
       controller: 'UserLogoutCtrl',
       templateUrl: 'views/logout.html',
     })
-    .when('/users/:userId', {
-      templateUrl: 'views/users/user.html',
-      controller: 'UserCtrl'
+    .when('/settings', {
+      templateUrl: 'views/settings/index.html',
+      controller: 'SettingsCtrl'
     });
 
   $locationProvider.html5Mode(true);

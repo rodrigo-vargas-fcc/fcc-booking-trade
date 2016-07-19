@@ -7,22 +7,26 @@
     <h1 class="title">Books</h1>
     <div id="books-list">
       <div class="row">
-        <div class="col-xs-2" ng-repeat="book in books">
+        <div class="col-xs-4" ng-repeat="book in books">
           <div class="book">
-            <a href="/book">
-              <h2 class="book-thumb-title">{{ book.title }}</h2>
-            </a>
-            <div class="book-image-container">
-              <img class="img-responsive" src="{{ book.image_url }}" alt="">
-            </div>
-            <div class="meta-info">
-              <span>Owner:</span>
-              <a href="/users/{{ book.owner_id }}" class="thumb-owner">{{ book.owner_name }}</a>
-            </div>
-            <button ng-click="proposeTrade(book._id)" class="btn exchange-book-btn" ng-disabled="book.yet_proposed" ng-class="{'in-exchange' : book.yet_proposed}">
-              <i class="fa fa-exchange"></i>
-            </button>
+            <div class="row">
+              <div class="book-image-container col-xs-4">
+                <img class="img-responsive" src="{{ book.image_url }}" alt="">
+              </div>
 
+              <div class="col-xs-8">
+                <a href="/book">
+                  <h2 class="book-thumb-title">{{ book.title }}</h2>
+                </a>
+                <div class="meta-info">
+                  <span>Owner:</span>
+                  <a href="/users/{{ book.owner_id }}" class="thumb-owner">{{ book.owner_name }}</a>
+                </div>
+                <button ng-click="proposeTrade(book._id)" class="btn exchange-book-btn" ng-disabled="book.yet_proposed" ng-class="{'in-exchange' : book.yet_proposed}">
+                  <i class="fa fa-exchange"></i>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
