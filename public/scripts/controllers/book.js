@@ -2,17 +2,18 @@
 
 angular.module('bookTrading')
 .controller('BookCtrl', function($scope, $http, $location, UserService){
-  var currentToken = UserService.getToken();
+  var currentUser = UserService.getCurrentUserInfo();
+
   $scope.loading = 0;
 
-  if (!currentToken)
+  if (!currentUser)
   {
     $location.path('/login');
     return;
   }
 
   var headers = {
-    'Authorization': currentToken,
+    'Authorization': currentUser.token,
     'Accept': 'application/json;odata=verbose'
   };
   

@@ -26,45 +26,9 @@ module.exports = function (app, jwt, passport) {
 
   app.post('/api/trades/accept/:tradeId', passport.authenticate('jwt', { session: false}), TradesController.accept);
 
-  app.get('/api/user', passport.authenticate('jwt', { session: false}), function(req, res) {
-    var token = helpers.getToken(req.headers);
-    if (token) {
-      var decoded = jwt.decode(token, config.secret);
-      User.findOne({
-        'local.email': decoded.local.email
-      }, function(err, currentUser) {
-        if (err) 
-          throw err;
- 
-        if (!currentUser) {
-          return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
-        } 
-        else
-        {
-          User.findOne( { _id : req.query.userId}, function(err, user){
-            if (err) 
-                throw err;
+  app.post('/api/users/update', passport.authenticate('jwt', { session: false}), UsersController.update);
 
-            Book.find({ ownerId : user._id}, function(err, userBooks){
-              if (err) 
-                throw err;
-
-              res.json({ success: true, 
-                         user : {
-                                  email : user.local.email,
-                                  books : userBooks
-                                }
-              });
-            });
-          });
-        }
-      });
-    } 
-    else 
-    {
-      return res.status(403).send({success: false, msg: 'No token provided.'});
-    }
-  });
+  app.get('/api/users/getCurrent', passport.authenticate('jwt', { session: false}), UsersController.getCurrent);
 
   app.get('*', function(req, res) {
     res.sendfile('./public/index.html');

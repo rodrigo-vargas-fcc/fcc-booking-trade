@@ -1,5 +1,21 @@
 <div ng-include src="'views/header.html'"></div>
 
 <div class="internal-content container">
-	Hello
+  <h1>User settings</h1>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Full name" ng-model="user.name">
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="City" ng-model="user.city">
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="State" ng-model="user.state">
+  </div>
+
+  <div>
+    <a class="btn btn-default" ng-click="updateUser()">Save changes</a>
+  </div>
 </div>

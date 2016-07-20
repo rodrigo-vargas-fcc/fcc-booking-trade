@@ -12,7 +12,7 @@ angular.module('bookTrading')
 
       .then(function successCallback(response) {
           if (response.data.success == true){
-            UserService.setToken(response.data.token);
+            UserService.setCurrentUserInfo(response.data.user);
 
             $location.path("/books");
           }          
@@ -31,7 +31,7 @@ angular.module('bookTrading')
 
       .then(function successCallback(response) {
           if (response.data.success == true){
-            UserService.setToken(response.data.token);
+            UserService.setCurrentUserInfo(response.data.user);
 
             $location.path("/books");
           }          

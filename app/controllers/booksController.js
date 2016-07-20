@@ -12,51 +12,48 @@ function BooksController () { }
 
 BooksController.getAll = function(req, res) {
   var token = Helpers.getToken(req.headers);
-  if (token) {
-    var decoded = jwt.decode(token, Config.secret);
+  if (!token)
+    return res.status(403).send({success: false, msg: 'No token provided.'});
+
+  var decoded = jwt.decode(token, Config.secret);
     
-    User.findOne({
-      'local.email': decoded._doc.local.email
-    }, function(err, user) {
-      if (err) throw err;
+  User.findOne({
+    'local.email': decoded._doc.local.email
+  }, function(err, user) {
+    if (err) throw err;
 
-      if (!user) {
-        return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
-      } 
-      else
-      {
-        Book.find({})
-       .populate('trades')
-       .exec(function(err, books) {
-          var booksReturned = [];
+    if (!user) {
+      return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
+    } 
+    else
+    {
+      Book.find({})
+     .populate('trades')
+     .exec(function(err, books) {
+        var booksReturned = [];
 
-          books.forEach(function(book){
-            var yetProposed = false;
-            book.trades.forEach(function(trade){
-              if (trade._requester.toString() == user._id.toString())
-                yetProposed = true;
-            });
-
-            booksReturned.push({  
-                                  _id : book._id,
-                                  owner_name : book.owner_name,
-                                  yet_proposed : yetProposed,
-                                  owner_id : book.owner_id,
-                                  image_url : book.image_url,
-                                  title : book.title,
-                                  trades : book.trades
-                                });
+        books.forEach(function(book){
+          var yetProposed = false;
+          book.trades.forEach(function(trade){
+            if (trade._requester.toString() == user._id.toString())
+              yetProposed = true;
           });
 
-          res.json({success: true, books : booksReturned});
+          booksReturned.push({  
+                                _id : book._id,
+                                owner_name : book.owner_name,
+                                yet_proposed : yetProposed,
+                                owner_id : book.owner_id,
+                                image_url : book.image_url,
+                                title : book.title,
+                                trades : book.trades
+                              });
         });
-      }
-    });
-  } 
-  else 
-  {
-    return res.status(403).send({success: false, msg: 'No token provided.'});
-  }
+
+        res.json({success: true, books : booksReturned});
+      });
+    }
+  });
 }
 
 BooksController.new = function(req, res) {

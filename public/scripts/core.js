@@ -8,24 +8,27 @@ angular
         ]
       )
   .factory('UserService', function($cookies) {
-    var token = '';
+    var userInfo;
 
     return {
-      getToken: function () {
-        if (token == '')
-          token = $cookies.get('token');
+      getCurrentUserInfo : function(){
+        if (!userInfo)
+        {
+          userInfo = JSON.parse($cookies.get('userInfo'));
+        }
 
-        return token;
+        return userInfo;
       },
-      setToken: function(value) {
-        token = value;
+      setCurrentUserInfo : function(value){
+        userInfo = value;
+
         var expirationDate = new Date();
         expirationDate.setMinutes(expirationDate.getMinutes() + 60);
-        $cookies.put('token', token, {'expires' : expirationDate });
+        $cookies.put('userInfo', JSON.stringify(userInfo), {'expires' : expirationDate });
       },
-      clearToken: function() {
-        token = '';
-        $cookies.remove('token');
+      clearCurrentUserInfo: function() {
+        userInfo = null;
+        $cookies.remove('userInfo');
       }
     };
   })
