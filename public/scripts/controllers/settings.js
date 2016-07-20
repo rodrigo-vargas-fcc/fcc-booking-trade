@@ -2,17 +2,17 @@
 
 angular.module('bookTrading')
 .controller('SettingsCtrl', function($scope, $http, $location, UserService) {
-  var currentUser = UserService.getCurrentUserInfo();
+  $scope.currentUser = UserService.getCurrentUserInfo();
   $scope.loading = 0;
 
-  if (!currentUser)
+  if (!$scope.currentUser)
   {
     $location.path('/login');
     return;
   }
 
   var headers = {
-    'Authorization': currentUser.token,
+    'Authorization': $scope.currentUser.token,
     'Accept': 'application/json;odata=verbose'
   };
 
@@ -26,7 +26,7 @@ angular.module('bookTrading')
     .then(
       function successCallback(response) {
         if (response.data.success == true)
-          $scope.books = response.data.books;
+          $scope.user = response.data.user;
 
         $scope.loading--;
       },

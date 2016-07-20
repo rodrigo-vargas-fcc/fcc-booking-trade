@@ -69,9 +69,9 @@ UsersController.update = function(req, res) {
     if (err) 
       throw err;
 
-    user.city = req.body.user.city;
-    user.state = req.body.user.state;
-    user.name = req.body.user.name;
+    user.local.city = req.body.user.city;
+    user.local.state = req.body.user.state;
+    user.local.name = req.body.user.name;
 
     user.save();
 
@@ -87,14 +87,19 @@ UsersController.getCurrent = function(req, res) {
   var decoded = jwt.decode(token, Config.secret);
 
   User.findOne({
-    'local.email': decoded._doc.local.email,    
-  }, 
-  'name city state',
+    'local.email': decoded._doc.local.email
+  },
   function(err, user) {
     if (err) 
       throw err;
 
-    return res.json({success: true, user : user });
+    var returnedUser =  { 
+                          name : user.getName(), 
+                          state : user.local.state, 
+                          city : user.local.city
+                        };
+
+    return res.json({success: true, user : returnedUser });
   });
 }
 

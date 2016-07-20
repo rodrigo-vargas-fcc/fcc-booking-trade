@@ -2,7 +2,7 @@
 
 angular.module('bookTrading')
 .controller('UserLogoutCtrl', function($location, UserService){
-  UserService.clearToken();
+  UserService.clearCurrentUserInfo();
 
   $location.path('/');
 });
