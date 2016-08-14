@@ -50,9 +50,11 @@ UsersController.signup = function(req, res) {
 
     var token = jwt.sign(newUser, Config.secret);
 
+    var user = { name : newUser.getName(), token : 'JWT ' + token };
+
     return res.json({  success: true, 
                 msg: 'Successful created new user.',
-                token :'JWT ' + token });
+                user : user });
   });  
 }
 
