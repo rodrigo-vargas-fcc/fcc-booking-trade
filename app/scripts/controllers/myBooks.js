@@ -20,7 +20,7 @@ angular.module('bookTrading')
     $scope.loading++;
     $http({
       method: 'GET',
-      'url': '/api/books',
+      'url': '/api/books/my',
       headers : headers
     })
     .then(

@@ -16,7 +16,7 @@ TradesController.propose = function(req, res) {
   if (token) {
     var decoded = jwt.decode(token, Config.secret);
     User.findOne({
-      'local.email': decoded._doc.local.email
+      'email': decoded._doc.email
     }, function(err, user) {
       if (err) 
         throw err;
@@ -61,7 +61,7 @@ TradesController.getOfBook = function(req, res) {
   if (token) {
     var decoded = jwt.decode(token, Config.secret);
     User.findOne({
-      'local.email': decoded._doc.local.email
+      'email': decoded._doc.email
     }, function(err, user) {
       if (err) 
         throw err;
@@ -93,7 +93,7 @@ TradesController.destroy =  function(req, res) {
   if (token) {
     var decoded = jwt.decode(token, Config.secret);
     User.findOne({
-      'local.email': decoded._doc.local.email
+      'email': decoded._doc.email
     }, function(err, user) {
       if (err) 
         throw err;
@@ -123,7 +123,7 @@ TradesController.accept =  function(req, res) {
   if (token) {
     var decoded = jwt.decode(token, Config.secret);
     User.findOne({
-      'local.email': decoded._doc.local.email
+      'email': decoded._doc.email
     }, function(err, user) {
       if (err) 
         throw err;

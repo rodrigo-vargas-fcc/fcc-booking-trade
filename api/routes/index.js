@@ -14,6 +14,8 @@ module.exports = function (app, jwt, passport) {
 
   app.get('/api/books', passport.authenticate('jwt', { session: false}), BooksController.getAll);
 
+  app.get('/api/books/my', passport.authenticate('jwt', { session: false}), BooksController.getMy);  
+
   app.post('/api/books/new', passport.authenticate('jwt', { session: false}), BooksController.new);
 
   app.post('/api/books/destroy', passport.authenticate('jwt', { session: false}), BooksController.destroy);

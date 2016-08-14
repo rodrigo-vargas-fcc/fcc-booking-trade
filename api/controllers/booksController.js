@@ -27,7 +27,53 @@ BooksController.getAll = function(req, res) {
     } 
     else
     {
-      Book.find({})
+      Book.find({ owner_id : { $ne: user._id }, traded : false})
+     .populate('trades')
+     .exec(function(err, books) {
+        var booksReturned = [];
+
+        books.forEach(function(book){
+          var yetProposed = false;
+          book.trades.forEach(function(trade){
+            if (trade._requester.toString() == user._id.toString())
+              yetProposed = true;
+          });
+
+          booksReturned.push({  
+                                _id : book._id,
+                                owner_name : book.owner_name,
+                                yet_proposed : yetProposed,
+                                owner_id : book.owner_id,
+                                image_url : book.image_url,
+                                title : book.title,
+                                trades : book.trades
+                              });
+        });
+
+        res.json({success: true, books : booksReturned});
+      });
+    }
+  });
+}
+
+BooksController.getMy = function(req, res) {
+  var token = Helpers.getToken(req.headers);
+  if (!token)
+    return res.status(403).send({success: false, msg: 'No token provided.'});
+
+  var decoded = jwt.decode(token, Config.secret);
+    
+  User.findOne({
+    'email': decoded._doc.email
+  }, function(err, user) {
+    if (err) throw err;
+
+    if (!user) {
+      return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
+    } 
+    else
+    {
+      Book.find({ owner_id : user._id, traded : false})
      .populate('trades')
      .exec(function(err, books) {
         var booksReturned = [];
@@ -77,7 +123,8 @@ BooksController.new = function(req, res) {
                                 title : req.body.name,
                                 owner_id : user._id,
                                 owner_name : ownerName,
-                                image_url : req.body.image_url });
+                                image_url : req.body.image_url,
+                                traded : false });
         
         book.save(function(err){
           if (err) 

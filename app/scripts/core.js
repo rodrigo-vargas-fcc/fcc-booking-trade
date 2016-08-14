@@ -12,11 +12,10 @@ angular
 
     return {
       getCurrentUserInfo : function(){
-        if (!userInfo)
+        if (!userInfo && $cookies.get('userInfo'))
         {
           userInfo = JSON.parse($cookies.get('userInfo'));
         }
-
         return userInfo;
       },
       setCurrentUserInfo : function(value){

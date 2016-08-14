@@ -50,7 +50,7 @@ angular.module('bookTrading')
         if (response.data.success == true)
         {
           var userInfo = UserService.getCurrentUserInfo();
-          userInfo.name = response.data.name;
+          userInfo.name = response.data.user.name;
           UserService.setCurrentUserInfo(userInfo);
           $location.path("/books");
         }        

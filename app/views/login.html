@@ -16,7 +16,7 @@
             <div class="form-group">
               <label>Password</label>
               <input type="password" class="form-control" name="password" ng-model="formData.password">
-              <p ng-show="!userForm.email.$error.validCombination && !userForm.email.$pristine && submitted" class="help-block">Invalid user/password</p>
+              <p ng-show="userForm.email.$error.invalidCombination && !userForm.email.$pristine && submitted" class="help-block">Invalid user/password</p>
             </div>
               
             <button type="submit" class="btn btn-default btn-block">Login</button>

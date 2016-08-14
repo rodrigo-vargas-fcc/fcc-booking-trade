@@ -2,6 +2,10 @@
 
 angular.module('bookTrading')
 .controller('UserCtrl', function($scope, $http, UserService, $location){
+  $scope.currentUser = UserService.getCurrentUserInfo();
+
+  if ($scope.currentUser)
+      $location.path('/books');
 
   $scope.signup = function(isValid) {
     $scope.submitted = true;
@@ -34,7 +38,7 @@ angular.module('bookTrading')
 
   $scope.login = function(isValid) {
     $scope.submitted = true;
-    $scope.userForm.password.$setValidity("validCombination", true);
+    $scope.userForm.password.$setValidity("invalidCombination", false);
 
     if (!isValid)
       return;
@@ -48,7 +52,7 @@ angular.module('bookTrading')
         }
         else
         {
-          $scope.userForm.password.$setValidity("validCombination", false);
+          $scope.userForm.password.$setValidity("invalidCombination", true);
         }
       }, function errorCallback(response) {
         alert(response.data);

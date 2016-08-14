@@ -71,7 +71,13 @@ UsersController.update = function(req, res) {
 
     user.save();
 
-    return res.json({success: true});
+    var returnedUser =  { 
+                          name : user.getName(), 
+                          state : user.state, 
+                          city : user.city
+                        };
+
+    return res.json({success: true, user : returnedUser });
   });
 }
 
