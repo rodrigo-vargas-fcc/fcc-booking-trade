@@ -18,7 +18,7 @@ BooksController.getAll = function(req, res) {
   var decoded = jwt.decode(token, Config.secret);
     
   User.findOne({
-    'local.email': decoded._doc.local.email
+    'email': decoded._doc.email
   }, function(err, user) {
     if (err) throw err;
 
@@ -61,7 +61,7 @@ BooksController.new = function(req, res) {
   if (token) {
     var decoded = jwt.decode(token, Config.secret);
     User.findOne({
-      'local.email': decoded._doc.local.email
+      'email': decoded._doc.email
     }, function(err, user) {
       if (err) 
         throw err;
@@ -98,7 +98,7 @@ BooksController.destroy = function(req, res) {
   if (token) {
     var decoded = jwt.decode(token, Config.secret);
     User.findOne({
-      'local.email': decoded._doc.local.email
+      'email': decoded._doc.email
     }, function(err, user) {
       if (err) 
         throw err;

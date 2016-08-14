@@ -14,17 +14,11 @@ UsersController.login = function(req, res) {
     if (err) 
       throw err;
 
-    if (!user)
+    if (!user || !user.validPassword(req.body.password))
     {
-      res.send({success: false, msg: 'Authentication failed. User not found.'});
+      res.send({success: false, msg: 'Invalid user/password.'});
       return;
-    } 
-    
-    if (!user.validPassword(req.body.password))
-    {
-      res.send({success: false, msg: 'Authentication failed. Wrong password.'});
-      return;
-    }
+    }    
 
     var token = jwt.sign(user, Config.secret);
       

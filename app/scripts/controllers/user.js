@@ -32,23 +32,26 @@ angular.module('bookTrading')
     }
   }
 
-  $scope.login = function() {
-    if ($scope.formData.email != undefined
-        && $scope.formData.password != undefined) {
-      $scope.loading = true;
+  $scope.login = function(isValid) {
+    $scope.submitted = true;
+    $scope.userForm.password.$setValidity("validCombination", true);
 
-      $http.post('/api/login', $scope.formData)
+    if (!isValid)
+      return;
 
-      .then(function successCallback(response) {
-          if (response.data.success == true){
-            UserService.setCurrentUserInfo(response.data.user);
+    $http.post('/api/login', $scope.formData)
+    .then(function successCallback(response) {
+        if (response.data.success == true){
+          UserService.setCurrentUserInfo(response.data.user);
 
-            $location.path("/books");
-          }          
-        }, function errorCallback(response) {
-          alert(response.data);
-        });
-    }
+          $location.path("/books");
+        }
+        else
+        {
+          $scope.userForm.password.$setValidity("validCombination", false);
+        }
+      }, function errorCallback(response) {
+        alert(response.data);
+      });    
   }
-
 });
