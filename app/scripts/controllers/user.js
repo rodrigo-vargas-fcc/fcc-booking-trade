@@ -3,7 +3,13 @@
 angular.module('bookTrading')
 .controller('UserCtrl', function($scope, $http, UserService, $location){
 
-  $scope.signup = function() {
+  $scope.signup = function(isValid) {
+    $scope.submitted = true;
+    $scope.userForm.email.$setValidity("alreadyUsed", true);
+
+    if (!isValid)
+      return;
+
     if ($scope.formData.email != undefined
         && $scope.formData.password != undefined) {
       $scope.loading = true;
@@ -15,7 +21,11 @@ angular.module('bookTrading')
             UserService.setCurrentUserInfo(response.data.user);
 
             $location.path("/books");
-          }          
+          }
+          else
+          {
+            $scope.userForm.email.$setValidity("alreadyUsed", false);
+          }
         }, function errorCallback(response) {
           alert(response.data);
         });

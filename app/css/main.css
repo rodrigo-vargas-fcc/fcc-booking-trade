@@ -37,9 +37,11 @@ body {
 	color: #26B8E5;
 }
 
-
-.form-wrapper {
-	margin-top: 300px;
+.centered-content {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  right: 0;
 }
 
 #form-container {

@@ -1,9 +1,9 @@
 'use strict';
 
-var PagesController  = require(process.cwd() + '/app/controllers/pages_controller.js');
-var UsersController  = require(process.cwd() + '/app/controllers/usersController.js');
-var BooksController  = require(process.cwd() + '/app/controllers/booksController.js');
-var TradesController = require(process.cwd() + '/app/controllers/tradesController.js');
+var PagesController  = require(process.cwd() + '/api/controllers/pages_controller.js');
+var UsersController  = require(process.cwd() + '/api/controllers/usersController.js');
+var BooksController  = require(process.cwd() + '/api/controllers/booksController.js');
+var TradesController = require(process.cwd() + '/api/controllers/tradesController.js');
 
 var Helpers         = require('../helpers');
 
@@ -31,7 +31,7 @@ module.exports = function (app, jwt, passport) {
   app.get('/api/users/getCurrent', passport.authenticate('jwt', { session: false}), UsersController.getCurrent);
 
   app.get('*', function(req, res) {
-    res.sendfile('./public/index.html');
+    res.sendfile('./app/index.html');
   });
 };
 

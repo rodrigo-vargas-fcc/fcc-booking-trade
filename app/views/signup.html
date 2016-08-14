@@ -1,0 +1,35 @@
+<div class="centered-content">
+  <div class="container">
+    <div class="row form-wrapper">
+      <div class="col-md-offset-3 col-md-6">
+        <div>
+          <span class="light-message talign">Create a new account and enjoy book trading club</span>
+        </div>
+
+        <div id="form-container">
+
+          <form name="userForm" ng-submit="signup(userForm.$valid)" novalidate="">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.name.$pristine && submitted }">
+              <label>Email</label>
+              <input type="email" class="form-control" name="email" ng-model="formData.email" ng-required="true">
+              <p ng-show="userForm.email.$error.email && !userForm.email.$pristine && submitted" class="help-block">Enter a valid email</p>
+              <p ng-show="userForm.email.$error.alreadyUsed && !userForm.email.$pristine && submitted" class="help-block">This email has already used</p>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.name.$pristine && submitted }">
+              <label>Password</label>
+              <input type="password" class="form-control" name="password" ng-model="formData.password" ng-required="true">
+              <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">Required field</p>
+            </div>
+
+            <button type="submit" class="btn btn-default btn-block">Signup</button>
+          </form>
+        </div>
+          
+        <div>
+          <a href="/login" class="talign dark-message">Already have a account? Login!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

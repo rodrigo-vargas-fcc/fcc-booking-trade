@@ -9,7 +9,7 @@ var Helpers       = require('../helpers');
 function UsersController () { }
 
 UsersController.login = function(req, res) {
-  var query = { 'local.email': req.body.email };
+  var query = { 'email': req.body.email };
   User.findOne(query, function(err, user) {
     if (err) 
       throw err;
@@ -39,9 +39,9 @@ UsersController.signup = function(req, res) {
     return res.json({success: false, msg: 'Please pass email and password.'});
   
   var newUser = new User();
-  newUser.local.name = req.body.email;
-  newUser.local.email = req.body.email;
-  newUser.local.password = newUser.generateHash(req.body.password);
+  newUser.name = req.body.email;
+  newUser.email = req.body.email;
+  newUser.password = newUser.generateHash(req.body.password);
   
   newUser.save(function(err) {
     if (err) {
@@ -64,14 +64,14 @@ UsersController.update = function(req, res) {
   var decoded = jwt.decode(token, Config.secret);
 
   User.findOne({
-    'local.email': decoded._doc.local.email
+    'email': decoded._doc.email
   }, function(err, user) {
     if (err) 
       throw err;
 
-    user.local.city = req.body.user.city;
-    user.local.state = req.body.user.state;
-    user.local.name = req.body.user.name;
+    user.city = req.body.user.city;
+    user.state = req.body.user.state;
+    user.name = req.body.user.name;
 
     user.save();
 
@@ -87,7 +87,7 @@ UsersController.getCurrent = function(req, res) {
   var decoded = jwt.decode(token, Config.secret);
 
   User.findOne({
-    'local.email': decoded._doc.local.email
+    'email': decoded._doc.email
   },
   function(err, user) {
     if (err) 
@@ -95,8 +95,8 @@ UsersController.getCurrent = function(req, res) {
 
     var returnedUser =  { 
                           name : user.getName(), 
-                          state : user.local.state, 
-                          city : user.local.city
+                          state : user.state, 
+                          city : user.city
                         };
 
     return res.json({success: true, user : returnedUser });

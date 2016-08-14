@@ -7,7 +7,7 @@ var passport   = require('passport');
 var mongoose   = require('mongoose');
 var jwt        = require('jsonwebtoken');
 
-var routes     = require('./app/routes/index.js');
+var routes     = require('./api/routes/index.js');
 
 var app        = express();
 var mongoUrl   = process.env.MONGODB_URI || "mongodb://localhost:27017/rvg-book-trading";
@@ -25,9 +25,9 @@ db.once('open', function() {
 
    // Express Configuration
 
-   app.use(express.static(__dirname + '/public'));   
-   app.use('/models', express.static(process.cwd() + '/app/models'));
-   app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
+   app.use(express.static(__dirname + '/app'));   
+   app.use('/models', express.static(process.cwd() + '/api/models'));
+   app.use('/controllers', express.static(process.cwd() + '/api/controllers'));
    app.use( bodyParser.json() );
    app.use(bodyParser.urlencoded({
       extended: true
