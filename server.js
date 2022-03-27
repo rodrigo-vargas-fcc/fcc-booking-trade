@@ -10,7 +10,7 @@ var jwt        = require('jsonwebtoken');
 var routes     = require('./api/routes/index.js');
 
 var app        = express();
-var mongoUrl   = process.env.MONGODB_URI || "mongodb://localhost:27017/rvg-book-trading";
+var mongoUrl   = process.env.MONGODB_URI || "mongodb://root:root@localhost:27017/admin";
 var port       = process.env.PORT || 3000;
 
 app.use(morgan('dev'));
