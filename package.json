@@ -20,7 +20,7 @@
   ],
   "author": "Rodrigo Vargas",
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcrypt": "5.0.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "1.19.2",
     "express": "4.17.3",
