@@ -3,7 +3,7 @@
 A book trading app for free code camp course.
 
 ## Setup
-Clone this repo to your desktop and run `npm install` or `yarn` to install all the dependencies.
+Clone this repo to your desktop and run `npm install` to install all the dependencies.
 
 ---
 
